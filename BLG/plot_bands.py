@@ -3,12 +3,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # File paths
-input_file = '/home/kravt/QE/qe-7.4.1/simul/blg_05_bands.out'
-output_file = '/home/kravt/QE/qe-7.4.1/simul/blg_05_bands_data.txt'
+input_file = '/home/kravt/QE/qe-7.4.1/BP/Monolayer/D = 0/ml_bp.bands.out'
+output_file = '/home/kravt/QE/qe-7.4.1/BP/Monolayer/D = 0/ml_bp_bands_data.txt'
 
 # Initialize lists to store data
 k_points = []
 energies = []
+bands_n = 20
 
 # Parse the file
 print(f"Opening file: {input_file}")
@@ -25,7 +26,7 @@ with open(input_file, 'r', encoding='utf-8') as f:
             current_k = [float(x) for x in k_match.groups()]  # kx, ky, kz
             current_energies = []
             i += 1  # Move to the next line for energies
-            while i < len(content) and len(current_energies) < 23:
+            while i < len(content) and len(current_energies) < bands_n:
                 energy_line = content[i].strip()
                 print(f"Checking energy line {i}: {energy_line}")
                 energies_match = re.findall(r'[-+]?\d+\.\d+(?:[eE][-+]?\d+)?', energy_line)
@@ -33,7 +34,7 @@ with open(input_file, 'r', encoding='utf-8') as f:
                     current_energies.extend([float(x) for x in energies_match])
                     print(f"Extracted energies: {current_energies}")
                 i += 1
-            if len(current_energies) == 23:
+            if len(current_energies) == bands_n:
                 print(f"Matched 16 energy values at lines {i-1} to {i}")
                 k_points.append(current_k)
                 energies.append(current_energies)

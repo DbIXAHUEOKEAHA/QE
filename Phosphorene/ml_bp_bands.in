@@ -1,0 +1,51 @@
+&CONTROL
+    calculation = 'bands'
+    prefix = 'ml_bp'
+    outdir = '/home/kravt/QE/qe-7.4.1/BP/Bulk/D = 0/tmp'
+    pseudo_dir = '/home/kravt/QE/qe-7.4.1/pseudo'
+    tprnfor = .true.
+    tstress = .true.
+    verbosity = 'high'
+    tefield = .true.
+    dipfield = .true.
+/
+&SYSTEM
+ibrav = 8
+celldm(1) = 8.404
+celldm(2) = 0.756
+celldm(3) = 20.0 
+nat = 4
+ntyp = 1
+ecutwfc = 60.0
+ecutrho = 480.0
+occupations = 'smearing'
+smearing = 'cold'
+degauss = 0.0001
+input_dft = 'pbe'
+nbnd = 20
+edir = 3
+emaxpos = 0.9
+eopreg = 0.05
+eamp = 0 ! 0.5 V/nm in a.u. (0.05 V/Å / 51.42)
+vdw_corr = 'dft-d3' ! Uncomment after testing (requires DFT-D3 support)
+/
+&ELECTRONS
+conv_thr = 5.0d-9
+mixing_beta = 0.2
+/
+ATOMIC_SPECIES
+P 30.974 P.pbe-n-kjpaw_psl.1.0.0.UPF
+ATOMIC_POSITIONS {bohr}
+P -0.699 0.000 2.008
+P 0.699 -0.000 -2.008 
+P -3.503 3.176 2.008
+P 3.503 -3.176 -2.008 
+
+HUBBARD (ortho-atomic)
+U P-3p 2.0
+
+K_POINTS {crystal_b}
+3
+  0.50000   0.00000   0.00000  40  ! X
+  0.00000   0.00000   0.00000  40  ! G
+  0.00000   0.50000   0.00000  40  ! Y
