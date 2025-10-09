@@ -6,46 +6,52 @@
     tprnfor = .true.
     tstress = .true.
     verbosity = 'high'
-    tefield = .true.
-    dipfield = .true.
+    !tefield = .true.
+    !dipfield = .true.
 /
 &SYSTEM
 ibrav = 8
-celldm(1) = 6.254993
-celldm(2) = 1.323262
-celldm(3) = 3.172205
+celldm(1) = 6.26
+celldm(2) = 1.342276472
+celldm(3) = 3.239468046
+lspinorb=.true.
+noncolin=.true.
 nat = 8
 ntyp = 1
 ecutwfc = 60.0
 ecutrho = 480.0
-occupations = 'tetrahedra_opt'
-!smearing = 'mv'
-!degauss = 0.01
+occupations = 'smearing'
+smearing = 'mv'
+degauss = 0.01
 input_dft = 'pbe'
 nbnd = 40
-edir = 3
-emaxpos = 0.9
-eopreg = 0.05
-eamp = 0 ! 0.5 V/nm in a.u. (0.05 V/Å / 51.42)
+!edir = 3
+!emaxpos = 0.9
+!eopreg = 0.05
+!eamp = 0 ! 0.5 V/nm in a.u. (0.05 V/Å / 51.42)
 vdw_corr = 'dft-d3' ! Uncomment after testing (requires DFT-D3 support)
 /
 &ELECTRONS
-conv_thr = 2.0d-8
+conv_thr = 1.0d-8
 mixing_beta = 0.2
 /
 ATOMIC_SPECIES
-P 30.974 P.pbe-n-kjpaw_psl.1.0.0.UPF
-ATOMIC_POSITIONS {crystal}
-P 0.000 0.090 0.098
-P 0.000 0.910 0.902
-P 0.000 0.590 0.402
-P 0.000 0.410 0.598
-P 0.500 0.090 0.598
-P 0.500 0.910 0.402
-P 0.500 0.590 0.902
-P 0.500 0.410 0.098
+P 30.974 P.rel-pbe-n-rrkjus_psl.0.1.UPF
+
+!Relaxed values
+ATOMIC_POSITIONS (crystal)
+P               -0.0000000000        0.0826233420        0.0997223897
+P               -0.0000000000        0.9173766580        0.9002776103
+P               -0.0000000000        0.5826234784        0.4002776822
+P               -0.0000000000        0.4173765216        0.5997223178
+P                0.5000000000        0.0826235720        0.5997223171
+P                0.5000000000        0.9173764280        0.4002776829
+P                0.5000000000        0.5826233750        0.9002776116
+P                0.5000000000        0.4173766250        0.0997223884
+
+HUBBARD (ortho-atomic)
+U P-3p 1.0
+
 K_POINTS automatic
 12 12 2  0 0 0
-HUBBARD (ortho-atomic)
-U P-3p 2.0
 
